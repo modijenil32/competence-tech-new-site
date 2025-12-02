@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "routes": [
-    { "src": "/about", "dest": "/about.html" },
-    { "src": "/products", "dest": "/products.html" },
-    { "src": "/services", "dest": "/services.html" },
-    { "src": "/contact", "dest": "/contact.html" },
-    { "src": "/product-cnc-face-milling", "dest": "/product-cnc-face-milling.html" },
-    { "src": "/product-cnc-drilling", "dest": "/product-cnc-drilling.html" },
-    { "src": "/product-tubesheet-drilling", "dest": "/product-tubesheet-drilling.html" },
-    { "src": "/product-cnc-wood-router", "dest": "/product-cnc-wood-router.html" }
+  "rewrites": [
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/products", "destination": "/products.html" },
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/product-cnc-face-milling", "destination": "/product-cnc-face-milling.html" },
+    { "source": "/product-cnc-drilling", "destination": "/product-cnc-drilling.html" },
+    { "source": "/product-tubesheet-drilling", "destination": "/product-tubesheet-drilling.html" },
+    { "source": "/product-cnc-wood-router", "destination": "/product-cnc-wood-router.html" }
   ]
 }
