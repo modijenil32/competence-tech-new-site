@@ -1,14 +1,6 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/products", "destination": "/products.html" },
-    { "source": "/services", "destination": "/services.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/product-cnc-face-milling", "destination": "/product-cnc-face-milling.html" },
-    { "source": "/product-cnc-drilling", "destination": "/product-cnc-drilling.html" },
-    { "source": "/product-tubesheet-drilling", "destination": "/product-tubesheet-drilling.html" },
-    { "source": "/product-cnc-wood-router", "destination": "/product-cnc-wood-router.html" }
-  ]
+  "public": ".",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
