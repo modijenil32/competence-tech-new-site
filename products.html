@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Products - Competence Tech</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="site-title">
+      <img src="https://via.placeholder.com/300x80.png?text=Competence+Tech+Logo" alt="Competence Tech logo">
+      <div>
+        <h1 style="margin:0">Competence Tech</h1>
+        <div class="nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="products.html">Products</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section>
+    <h2>Our Products</h2>
+    <div class="card-grid" id="products-container"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>© 2025 Competence Techno Engineers Pvt. Ltd.. All rights reserved.</p>
+    <p>Plot No. 123, Industrial Area, Nashik, Maharashtra 422001, India • +91-9876543210 • <a href="mailto:info@competencetech.com">info@competencetech.com</a></p>
+  </div>
+</footer>
+
+<!-- Product Cards and Dynamic JSON-LD -->
+<script>
+const products = [
+  {
+    name: "CNC Face Milling Machine",
+    image: "cnc-face-milling.jpg",
+    price: "450000",
+    url: "product-cnc-face-milling.html",
+    description: "High precision CNC face milling machine for industrial applications.",
+    sku: "CNC-FM-001",
+    rating: "4.5",
+    reviewCount: "12",
+    review: {
+      "@type": "Review",
+      "author": "John Doe",
+      "datePublished": "2025-01-10",
+      "reviewBody": "Excellent CNC machine, highly recommended!",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      }
+    }
+  },
+  {
+    name: "CNC Drilling Machine",
+    image: "cnc-drilling.jpg",
+    price: "320000",
+    url: "product-cnc-drilling.html",
+    description: "Accurate multi-head drilling solutions.",
+    sku: "CNC-DR-002",
+    rating: "4.7",
+    reviewCount: "8"
+  },
+  {
+    name: "CNC Tubesheet Drilling Machine",
+    image: "cnc-tubesheet.jpg",
+    price: "550000",
+    url: "product-tubesheet-drilling.html",
+    description: "Specialised tubesheet drilling for heat exchangers.",
+    sku: "CNC-TS-003"
+  },
+  {
+    name: "CNC Wood Router",
+    image: "cnc-wood-router.jpg",
+    price: "210000",
+    url: "product-cnc-wood-router.html",
+    description: "4-axis routers for wood and composites.",
+    sku: "CNC-WR-004"
+  }
+];
+
+const container = document.getElementById('products-container');
+const productSchema = [];
+
+products.forEach(product => {
+  // Render product cards
+  container.innerHTML += `
+    <article class="card">
+      <img src="images/${product.image}" alt="${product.name}">
+      <h4>${product.name}</h4>
+      <p class="product-meta">Price: ${product.price} INR</p>
+      <p>${product.description}</p>
+      <p><a class="btn" href="${product.url}">View Product</a></p>
+    </article>
+  `;
+
+  // Build JSON-LD with optional fields
+  const schema = {
+    "@type": "Product",
+    "name": product.name,
+    "image": "https://competence-tech-site.vercel.app/images/" + product.image,
+    "description": product.description,
+    "brand": "Competence Techno Engineers Pvt. Ltd.",
+    "sku": product.sku,
+    "offers": {
+      "@type": "Offer",
+      "url": "https://competence-tech-site.vercel.app/" + product.url,
+      "priceCurrency": "INR",
+      "price": product.price,
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": "2025-12-31"
+    }
+  };
+
+  if(product.rating && product.reviewCount){
+    schema.aggregateRating = {
+      "@type": "AggregateRating",
+      "ratingValue": product.rating,
+      "reviewCount": product.reviewCount
+    };
+  }
+
+  if(product.review){
+    schema.review = [product.review];
+  }
+
+  productSchema.push(schema);
+});
+
+// Inject Product JSON-LD into head
+const productScript = document.createElement('script');
+productScript.type = 'application/ld+json';
+productScript.text = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": productSchema
+});
+document.head.appendChild(productScript);
+
+// Dynamic Breadcrumbs
+(function() {
+  const breadcrumbs = [
+    { name: "Home", url: "https://competence-tech-site.vercel.app/" },
+    { name: "Products", url: "https://competence-tech-site.vercel.app/products.html" }
+  ];
+
+  // Detect first product on page for breadcrumb
+  const productName = document.querySelector('h4')?.textContent;
+  if(productName) {
+    breadcrumbs.push({ name: productName, url: window.location.href });
+  }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": crumb.name,
+      "item": crumb.url
+    }))
+  };
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.text = JSON.stringify(breadcrumbSchema);
+  document.head.appendChild(script);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "styles/**", "use": "@vercel/static" },
+    { "src": "images/**", "use": "@vercel/static" },
+    { "src": "scripts/**", "use": "@vercel/static" },
+    { "src": "googlee263a0965fda1c1f.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/about", "dest": "/about.html" },
+    { "src": "/products", "dest": "/products.html" },
+    { "src": "/services", "dest": "/services.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/product-cnc-face-milling", "dest": "/product-cnc-face-milling.html" },
+    { "src": "/product-cnc-drilling", "dest": "/product-cnc-drilling.html" },
+    { "src": "/product-tubesheet-drilling", "dest": "/product-tubesheet-drilling.html" },
+    { "src": "/product-cnc-wood-router", "dest": "/product-cnc-wood-router.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
